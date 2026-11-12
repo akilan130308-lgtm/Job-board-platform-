@@ -1,0 +1,23 @@
+
+<section id="login">
+    <h2>User Login</h2>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+</section>
+
+<section id="createEvent">
+    <h2>Create Recruitment Event</h2>
+    <input id="newEventName" placeholder="Event Name">
+    <input id="newEventDate" type="date">
+    <input id="newEventLocation" placeholder="Location">
+    <button onclick="createEvent()">Create Event</button>
+</section>
+
+<section>
+    <h2>Admin Dashboard</h2>
+    <button onclick="loadDashboard()">View Dashboard</button>
+    <pre id="dashboard"></pre>
+    <button onclick="loadParticipants()">View Participants</button>
+    <pre id="participants"></pre>
+</section>
