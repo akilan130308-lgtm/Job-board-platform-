@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Board Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Job Board Platform</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#jobs">Jobs</a>
+        <a href="#events">Events</a>
+        <a href="#register">Register</a>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <h2>Find Your Dream Job</h2>
+    <p>Connect with employers and build your career.</p>
+    <input id="search" placeholder="Search job title">
+    <button onclick="searchJobs()">Search Jobs</button>
+</section>
+
+<section id="jobs">
+    <h2>Available Jobs</h2>
+    <div id="jobList"></div>
+</section>
+
+<section id="register">
+    <h2>User Registration</h2>
+    <input id="name" placeholder="Enter Name">
+    <input id="email" type="email" placeholder="Enter Email">
+    <input id="password" type="password" placeholder="Enter Password">
+
+    <select id="role">
+        <option value="JOB_SEEKER">Job Seeker</option>
+        <option value="EMPLOYER">Employer</option>
+    </select>
+
+    <button onclick="registerUser()">Register</button>
+</section>
+
+<section id="post">
+    <h2>Post a Job (Employer)</h2>
+    <input id="title" placeholder="Job Title">
+    <input id="company" placeholder="Company Name">
+    <input id="location" placeholder="Location">
+    <button onclick="postJob()">Post Job</button>
+</section>
+
+<section id="events">
+    <h2>Recruitment Events</h2>
+    <div id="eventList"></div>
+    <input id="eventId" type="number" placeholder="Event ID">
+    <input id="participantName" placeholder="Participant Name">
+    <input id="participantEmail" type="email" placeholder="Email">
+    <button onclick="joinEvent()">Register for Event</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
