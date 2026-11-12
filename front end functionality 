@@ -1,0 +1,117 @@
+
+const API = "http://localhost:8080/api";
+
+async function registerUser() {
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        role: document.getElementById("role").value
+    };
+
+    const response = await fetch(API + "/users/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    alert(await response.text());
+}
+
+async function loadJobs() {
+    const response = await fetch(API + "/jobs");
+    const jobs = await response.json();
+
+    document.getElementById("jobList").innerHTML =
+        jobs.map(job => `
+            <div class="job-card">
+                <h3>${job.title}</h3>
+                <p>${job.company}</p>
+                <p>${job.location}</p>
+                <button onclick="applyJob(${job.id})">
+                    Apply Now
+                </button>
+            </div>
+        `).join("");
+}
+
+async function searchJobs() {
+    const keyword = document.getElementById("search").value;
+    const response = await fetch(
+        API + "/jobs/search?keyword=" + encodeURIComponent(keyword)
+    );
+    const jobs = await response.json();
+
+    document.getElementById("jobList").innerHTML =
+        jobs.map(job => `
+            <div class="job-card">
+                <h3>${job.title}</h3>
+                <p>${job.company} - ${job.location}</p>
+                <button onclick="applyJob(${job.id})">Apply Now</button>
+            </div>
+        `).join("");
+}
+
+async function postJob() {
+    const data = {
+        title: document.getElementById("title").value,
+        company: document.getElementById("company").value,
+        location: document.getElementById("location").value
+    };
+
+    const response = await fetch(API + "/jobs", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    alert(await response.text());
+    loadJobs();
+}
+
+async function applyJob(jobId) {
+    const email = prompt("Enter your registered email:");
+    if (!email) return;
+
+    const response = await fetch(API + "/applications", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({jobId, email})
+    });
+
+    alert(await response.text());
+}
+
+async function joinEvent() {
+    const data = {
+        eventId: Number(document.getElementById("eventId").value),
+        name: document.getElementById("participantName").value,
+        email: document.getElementById("participantEmail").value
+    };
+
+    const response = await fetch(API + "/events/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    alert(await response.text());
+}
+
+async function loadEvents() {
+    const response = await fetch(API + "/events");
+    const events = await response.json();
+
+    document.getElementById("eventList").innerHTML =
+        events.map(event => `
+            <div class="job-card">
+                <h3>${event.name}</h3>
+                <p>${event.date}</p>
+                <p>${event.location}</p>
+                <p>Event ID: ${event.id}</p>
+            </div>
+        `).join("");
+}
+
+loadJobs();
+loadEvents();
